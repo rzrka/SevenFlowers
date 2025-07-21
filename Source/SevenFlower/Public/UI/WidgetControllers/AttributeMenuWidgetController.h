@@ -24,8 +24,12 @@ public:
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attribute")
 	FAttributeInfoSignature AttributeInfoDelegate;
 
-private:
+protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UAttributeInfo> AttributeInfo;
+
+private:
+
+	void BroadcastAttributeInfo(const FGameplayTag& AttributeTag, const FGameplayAttribute& Attribute) const;
 };
