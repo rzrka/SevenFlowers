@@ -32,7 +32,14 @@ public:
 	FGameplayTag Attributes_Secondary_ManaRegeneration;
 	FGameplayTag Attributes_Secondary_MaxHealth;
 	FGameplayTag Attributes_Secondary_MaxMana;
-protected:
+	
+	FGameplayTag InputTag_WeakAttack;
+	FGameplayTag InputTag_StrongAttack;
+	FGameplayTag InputTag_Dodge;
+	FGameplayTag InputTag_1Spell;
+	FGameplayTag InputTag_2Spell;
+	FGameplayTag InputTag_3Spell;
+	FGameplayTag InputTag_4Spell;
 
 private:
 	static FSFGameplayTags GameplayTags;

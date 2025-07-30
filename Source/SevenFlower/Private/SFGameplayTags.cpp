@@ -71,4 +71,41 @@ void FSFGameplayTags::InitializeNativeGameplayTags()
 	FName("Attributes.Secondary.MaxMana"), 
 	   FString("Maximum amount of Mana obtainable")
 	);
+
+	// Input Tags
+	
+	GameplayTags.InputTag_WeakAttack = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.WeakAttack"), 
+		FString("Input Tag for Weak Attack")
+	);
+
+	GameplayTags.InputTag_StrongAttack = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.StrongAttack"), 
+		FString("Input Tag for Strong Attack")
+	);
+
+	GameplayTags.InputTag_Dodge = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.Dodge"), 
+		FString("Input Tag for Dodge")
+	);
+
+	GameplayTags.InputTag_1Spell = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.1Spell"), 
+		FString("Input Tag for 2Spell")
+	);
+
+	GameplayTags.InputTag_2Spell = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.2Spell"), 
+		FString("Input Tag for 2Spell")
+	);
+
+	GameplayTags.InputTag_3Spell = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.3Spell"), 
+		FString("Input Tag for 3Spell")
+	);
+
+	GameplayTags.InputTag_4Spell = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("InputTag.4Spell"), 
+		FString("Input Tag for 4Spell")
+	);
 }

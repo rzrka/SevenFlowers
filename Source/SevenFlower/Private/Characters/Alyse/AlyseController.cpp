@@ -6,6 +6,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Input/SFInputComponent.h"
 
 AAlyseController::AAlyseController()
 {
@@ -28,31 +29,17 @@ void AAlyseController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAlyseController::Move);
-	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlyseController::Look);
-	EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AAlyseController::Walk);
-	EnhancedInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AAlyseController::Walk);
-	EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &AAlyseController::Crouch);
-	EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AAlyseController::Crouch);
-	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AAlyseController::Jump);
+	USFInputComponent* SFInputComponent = CastChecked<USFInputComponent>(InputComponent);
+	
+	SFInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlyseController::Look);
+	SFInputComponent->BindAction(WalkAction, ETriggerEvent::Triggered, this, &AAlyseController::Walk);
+	SFInputComponent->BindAction(WalkAction, ETriggerEvent::Completed, this, &AAlyseController::Walk);
+	SFInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &AAlyseController::Crouch);
+	SFInputComponent->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AAlyseController::Crouch);
+	SFInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AAlyseController::Jump);
 }
 
-void AAlyseController::Move(const FInputActionValue& InputActionValue)
-{
-	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
-	const FRotator YawRotation(0.f, GetControlRotation().Yaw, 0.f);
 
-	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-	if (APawn* ControlledPawn = GetPawn<APawn>())
-	{
-		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
-		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
-	}
-}
 
 void AAlyseController::Look(const FInputActionValue& InputActionValue)
 {

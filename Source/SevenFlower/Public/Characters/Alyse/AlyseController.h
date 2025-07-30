@@ -27,9 +27,6 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputMappingContext> AlyseContext;
-
-	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> MoveAction;
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputAction> LookAction;
@@ -42,8 +39,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputAction> JumpAction;
-
-	void Move(const FInputActionValue& InputActionValue);
+	
 	void Look(const FInputActionValue& InputActionValue);
 	void Walk(const FInputActionValue& InputActionValue);
 	void Crouch(const FInputActionValue& InputActionValue);

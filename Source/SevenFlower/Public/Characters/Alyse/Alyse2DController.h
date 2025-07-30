@@ -32,11 +32,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputMappingContext> AlyseContext;
-
-	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> MoveAction;
-
-	void Move(const FInputActionValue& InputActionValue);
+	
 
 	void CursorTrace();
 	IlightingInterface* LastActor;

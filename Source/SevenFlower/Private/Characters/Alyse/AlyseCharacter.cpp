@@ -47,6 +47,7 @@ void AAlyseCharacter::PossessedBy(AController* NewController)
 	
 	// Init ability actor info for the Server
 	InitAbilityActorInfo();
+	InitCharacterAbilities();
 }	
 
 void AAlyseCharacter::OnRep_PlayerState()
@@ -62,6 +63,15 @@ int32 AAlyseCharacter::GetPlayerLevel()
 	const AAlysePlayerState* AlysePlayerState = GetPlayerState<AAlysePlayerState>();
 	check(AlysePlayerState);
 	return AlysePlayerState->GetPlayerLevel();
+}
+
+void AAlyseCharacter::InitCharacterAbilities()
+{
+	USFAbilitySystemComponent* SFASC = CastChecked<USFAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	SFASC->AddCharacterAbilities(StartupAbilities);
+	
 }
 
 void AAlyseCharacter::InitAbilityActorInfo()
