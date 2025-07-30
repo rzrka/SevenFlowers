@@ -25,9 +25,9 @@ protected:
 	virtual void SetupInputComponent() override;
 	virtual void Move(const FInputActionValue& InputActionValue);
 
-	void AbilityInputTagPressed(FGameplayTag InputTag);
-	void AbilityInputTagReleased(FGameplayTag InputTag);
-	void AbilityInputTagHeld(FGameplayTag InputTag);
+	virtual void AbilityInputTagPressed(FGameplayTag InputTag);
+	virtual void AbilityInputTagReleased(FGameplayTag InputTag);
+	virtual void AbilityInputTagHeld(FGameplayTag InputTag);
 
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<USFInputConfiguration> InputConfig;

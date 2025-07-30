@@ -8,7 +8,7 @@
 #include "Alyse2DController.generated.h"
 
 
-
+class USplineComponent;
 struct FInputActionValue;
 
 
@@ -34,7 +34,22 @@ private:
 	TObjectPtr<class UInputMappingContext> AlyseContext;
 	
 
+	virtual void AbilityInputTagPressed(FGameplayTag InputTag) override;
+	virtual void AbilityInputTagHeld(FGameplayTag InputTag) override;
+	
 	void CursorTrace();
 	IlightingInterface* LastActor;
 	IlightingInterface* ThisActor;
+
+	FVector CachedDestination = FVector::ZeroVector;
+	float FollowTime = 0.f;
+	float ShortPressThreshold = 0.5f;
+	bool bAutoRunning = false;
+	bool bTargeting = true;
+
+	UPROPERTY(EditDefaultsOnly)
+	float AutoRunAcceptanceRadius = 50.f;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USplineComponent> Spline;
 };
