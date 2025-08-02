@@ -37,3 +37,4 @@ protected:
 
 	USFAbilitySystemComponent* GetASC();
 };
+ 

@@ -8,11 +8,7 @@
 
 void USFAbilitySystemComponent::AbilityActorInfoSet()
 {
-	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &USFAbilitySystemComponent::EffectApplied);
-
-	const FSFGameplayTags& GameplayTags = FSFGameplayTags::Get();
-	// GameplayTags.Attributes_Secondary_Armor.ToString()
-	
+	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &USFAbilitySystemComponent::ClientEffectApplied_Implementation);
 }
 
 void USFAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities)
@@ -58,7 +54,7 @@ void USFAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& Inpu
 	}
 }
 
-void USFAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* AbilitySystemComponent,
+void USFAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* AbilitySystemComponent,
                                               const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)
 {
 	FGameplayTagContainer TagContainer;
