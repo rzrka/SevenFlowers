@@ -6,6 +6,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Input/SFInputComponent.h"
 
 AAlyseController::AAlyseController()
@@ -78,11 +79,14 @@ void AAlyseController::Crouch(const FInputActionValue& InputActionValue)
 		{
 			if (bIsPressed)
 			{
+				// TODO подобрать корректные значения
+				ControlledCharacter->GetCapsuleComponent()->SetCapsuleHalfHeight(50.f);
 				ControlledCharacter->Crouch();
 				ControlledCharacter->isCrouching = true;
 			}
 			else
 			{
+				ControlledCharacter->GetCapsuleComponent()->SetCapsuleHalfHeight(100.f);
 				ControlledCharacter->UnCrouch();
 				ControlledCharacter->isCrouching = false;
 			}

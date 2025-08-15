@@ -26,6 +26,12 @@ void ASFCharacter::BeginPlay()
 	
 }
 
+FVector ASFCharacter::GetCombatSocketLocation()
+{
+	check(Weapon);
+	return Weapon->GetSocketLocation(WeaponTipSocketName);
+}
+
 void ASFCharacter::InitAbilityActorInfo()
 {
 }

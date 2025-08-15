@@ -10,7 +10,7 @@
 
 class USplineComponent;
 struct FInputActionValue;
-
+class UNavigationPath;
 
 class IlightingInterface;
 /**
@@ -49,6 +49,8 @@ private:
 	float ShortPressThreshold = 0.5f;
 	bool bAutoRunning = false;
 	bool bTargeting = true;
+
+	UNavigationPath* GetReachablePointNear();
 
 	UPROPERTY(EditDefaultsOnly)
 	float AutoRunAcceptanceRadius = 50.f;

@@ -14,6 +14,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Input/SFInputComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Interaction/lightingInterface.h"
 
 AAlyse2DController::AAlyse2DController()
@@ -99,19 +100,46 @@ void AAlyse2DController::AbilityInputTagReleased(FGameplayTag InputTag)
 			))
 			{
 				Spline->ClearSplinePoints();
+
+				// Если выбрали точку вне NavMesh области, определяем ближайшую доступную
+				if (NavPath->PathPoints.IsEmpty())
+				{
+					NavPath = GetReachablePointNear();
+				}
+				
 				for (const FVector& PointLoc : NavPath->PathPoints)
 				{
 					Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
 				}
-				TArray x = NavPath->PathPoints;
-				if (!NavPath->PathPoints.IsEmpty()) CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() -
-					1];
+				
 				bAutoRunning = true;
 			}
 		}
 		FollowTime = 0.f;
 		bTargeting = false;
 	}
+}
+
+UNavigationPath* AAlyse2DController::GetReachablePointNear()
+{
+	const APawn* ControlledPawn = GetPawn();
+	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	const FNavAgentProperties& AgentProps = ControlledPawn->GetNavAgentPropertiesRef();
+	FNavLocation ProjectedDestination;
+	bool bProjected = NavSys->ProjectPointToNavigation(
+		CachedDestination,
+		ProjectedDestination,       
+		FVector(500.0f, 500.0f, 300.0f),           
+		&AgentProps
+	);
+
+	CachedDestination = ProjectedDestination;
+
+	return UNavigationSystemV1::FindPathToLocationSynchronously(
+this,
+ControlledPawn->GetActorLocation(),
+CachedDestination
+	);
 }
 
 void AAlyse2DController::AbilityInputTagHeld(FGameplayTag InputTag)
@@ -159,6 +187,8 @@ void AAlyse2DController::CursorTrace()
 	}
 }
 
+
+
 void AAlyse2DController::SetSpringArm()
 {
 	APawn* ControlledPawn = GetPawn();
@@ -187,8 +217,11 @@ void AAlyse2DController::AutoRun()
 		const FVector Direction = Spline->FindDirectionClosestToWorldLocation(
 			LocationOnSpline, ESplineCoordinateSpace::World);
 		ControlledPawn->AddMovementInput(Direction);
-
+		
 		const float DistanceToDestination = (LocationOnSpline - CachedDestination).Length();
+		UKismetSystemLibrary::PrintString(this, FString::Printf(TEXT("DistanceToDestination: %lf"), DistanceToDestination));
+		DrawDebugSphere(GetWorld(), LocationOnSpline, 8.f, 8, FColor::Blue, false, 3.f);
+		DrawDebugSphere(GetWorld(), ControlledPawn->GetActorLocation(), 8.f, 8, FColor::Red, false, 3.f);
 		if (DistanceToDestination <= AutoRunAcceptanceRadius)
 		{
 			bAutoRunning = false;
