@@ -5,6 +5,8 @@
 
 #include "Actor/SFProjectile.h"
 #include "Interaction/CombatInterface.h"
+#include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
+#include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 void USFProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -12,13 +14,19 @@ void USFProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle
                                          const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+}
 
-	const bool bIsServer =  HasAuthority(&ActivationInfo);
+void USFProjectileSpell::SpawnProjectile()
+{
+	
+	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
-
+	
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo());
 	if (CombatInterface)
 	{
+		
+		
 		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
 
 		FTransform SpawnTransform;
@@ -35,6 +43,5 @@ void USFProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 		
 		Projectile->FinishSpawning(SpawnTransform);
 	}
-	
 	
 }
