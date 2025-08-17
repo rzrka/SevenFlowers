@@ -39,8 +39,10 @@ void AAlyse2DController::BeginPlay()
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(
 		GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(AlyseContext, 0);
+	if(Subsystem)
+	{
+		Subsystem->AddMappingContext(AlyseContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
@@ -54,7 +56,13 @@ void AAlyse2DController::BeginPlay()
 void AAlyse2DController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
+
+	USFInputComponent* SFInputComponent = CastChecked<USFInputComponent>(InputComponent);
+
+	SFInputComponent->BindAction(ModifierAction, ETriggerEvent::Started, this, &AAlyse2DController::ModifierPressed);
+	SFInputComponent->BindAction(ModifierAction, ETriggerEvent::Completed, this, &AAlyse2DController::ModifierReleased);
 }
+
 
 void AAlyse2DController::OnPossess(APawn* ControlledPawn)
 {
@@ -84,11 +92,9 @@ void AAlyse2DController::AbilityInputTagReleased(FGameplayTag InputTag)
 		return;
 	}
 
-	if (bTargeting)
-	{
-		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
-	}
-	else
+	if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
+	
+	if (!bTargeting and !bModifierKeyDown)
 	{
 		const APawn* ControlledPawn = GetPawn();
 		if (FollowTime <= ShortPressThreshold && ControlledPawn)
@@ -150,7 +156,7 @@ void AAlyse2DController::AbilityInputTagHeld(FGameplayTag InputTag)
 		return;
 	}
 
-	if (bTargeting)
+	if (bTargeting || bModifierKeyDown)
 	{
 		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
 	}

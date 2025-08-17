@@ -3,11 +3,14 @@
 
 #include "Characters/SFCharacter.h"
 #include "AbilitySystemComponent.h"
-
+#include "Components/CapsuleComponent.h"
 
 ASFCharacter::ASFCharacter()
 {	
 	PrimaryActorTick.bCanEverTick = false;
+
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));

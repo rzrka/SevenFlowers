@@ -34,6 +34,12 @@ private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputMappingContext> AlyseContext;
 
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<class UInputAction> ModifierAction;
+
+	void ModifierPressed() { bModifierKeyDown = true;};
+	void ModifierReleased() { bModifierKeyDown = false;};
+	bool bModifierKeyDown = false;
 
 	virtual void AbilityInputTagPressed(FGameplayTag InputTag) override;
 	virtual void AbilityInputTagReleased(FGameplayTag InputTag) override;
@@ -62,3 +68,4 @@ private:
 
 	void AutoRun();
 };
+
