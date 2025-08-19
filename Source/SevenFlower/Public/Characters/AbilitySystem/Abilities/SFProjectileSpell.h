@@ -7,6 +7,7 @@
 #include "SFProjectileSpell.generated.h"
 
 class ASFProjectile;
+class UGameplayEffect;
 /**
  * 
  */
@@ -24,4 +25,7 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<ASFProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 };

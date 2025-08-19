@@ -225,9 +225,7 @@ void AAlyse2DController::AutoRun()
 		ControlledPawn->AddMovementInput(Direction);
 		
 		const float DistanceToDestination = (LocationOnSpline - CachedDestination).Length();
-		UKismetSystemLibrary::PrintString(this, FString::Printf(TEXT("DistanceToDestination: %lf"), DistanceToDestination));
-		DrawDebugSphere(GetWorld(), LocationOnSpline, 8.f, 8, FColor::Blue, false, 3.f);
-		DrawDebugSphere(GetWorld(), ControlledPawn->GetActorLocation(), 8.f, 8, FColor::Red, false, 3.f);
+
 		if (DistanceToDestination <= AutoRunAcceptanceRadius)
 		{
 			bAutoRunning = false;
