@@ -26,8 +26,6 @@ struct FUIWidgetRow : public FTableRowBase
 
 class USFUserWidget;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float, NewData);
-
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
 

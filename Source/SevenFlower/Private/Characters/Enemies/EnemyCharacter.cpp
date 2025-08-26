@@ -5,7 +5,9 @@
 
 #include "Characters/AbilitySystem/SFAbilitySystemComponent.h"
 #include "Characters/AbilitySystem/SFAttributeSet.h"
+#include "Components/WidgetComponent.h"
 #include "SevenFlower/SevenFlower.h"
+#include "UI/Widgets/SFUserWidget.h"
 
 void AEnemyCharacter::BeginPlay()
 {
@@ -19,6 +21,32 @@ void AEnemyCharacter::InitAbilityActorInfo()
 	Cast<USFAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 
 	InitializeDefaultAttributes();
+
+	if (USFUserWidget* SFUserWidget = Cast<USFUserWidget>(HealthBar->GetUserWidgetObject()))
+	{
+		SFUserWidget->SetWidgetController(this);
+	}
+	
+	if (const USFAttributeSet* AS = Cast<USFAttributeSet>(AttributeSet))
+	{
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Health)
+			{
+				OnHealthChanged.Broadcast(Health.NewValue);
+			}
+		);
+
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AS->GetMaxHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& MaxHealth)
+			{
+				OnMaxHealthChanged.Broadcast(MaxHealth.NewValue);
+			}
+		);
+
+		OnHealthChanged.Broadcast(AS->GetHealth());
+		OnMaxHealthChanged.Broadcast(AS->GetMaxHealth());
+	}
+
 }
 
 AEnemyCharacter::AEnemyCharacter()
@@ -33,6 +61,9 @@ AEnemyCharacter::AEnemyCharacter()
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<USFAttributeSet>("AttributeSet");
+
+	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
+	HealthBar->SetupAttachment(GetRootComponent());
 }
 
 
