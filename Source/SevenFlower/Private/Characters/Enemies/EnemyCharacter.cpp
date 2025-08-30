@@ -4,6 +4,7 @@
 #include "Characters/Enemies/EnemyCharacter.h"
 
 #include "Characters/AbilitySystem/SFAbilitySystemComponent.h"
+#include "Characters/AbilitySystem/SFAbilitySystemLibrary.h"
 #include "Characters/AbilitySystem/SFAttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "SevenFlower/SevenFlower.h"
@@ -47,6 +48,11 @@ void AEnemyCharacter::InitAbilityActorInfo()
 		OnMaxHealthChanged.Broadcast(AS->GetMaxHealth());
 	}
 
+}
+
+void AEnemyCharacter::InitializeDefaultAttributes() const
+{
+	USFAbilitySystemLibrary::InititalizeDefaultAttributes(this, CharacterClass, Level, AbilitySystemComponent);
 }
 
 AEnemyCharacter::AEnemyCharacter()

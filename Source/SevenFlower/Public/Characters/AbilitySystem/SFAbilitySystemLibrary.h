@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Data/CharacterClassInfo.h"
 #include "SFAbilitySystemLibrary.generated.h"
 
 class UAttributeMenuWidgetController;
@@ -23,4 +25,7 @@ public:
 
 	UFUNCTION(BlueprintPure, Category="SFAbilitySystemLibrary|WidgetController")
 	static UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const UObject* WorldContextObject);
+
+	UFUNCTION(BlueprintCallable, Category="SFAbilitySystemLibrary|CharacterClassDefaults")
+	static void InititalizeDefaultAttributes(const UObject* WorldContextObject, ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC);
 };
