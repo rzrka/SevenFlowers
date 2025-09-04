@@ -41,6 +41,7 @@ public:
 	FGameplayTag InputTag_3Spell;
 	FGameplayTag InputTag_4Spell;
 
+	FGameplayTag Damage;
 private:
 	static FSFGameplayTags GameplayTags;
 };

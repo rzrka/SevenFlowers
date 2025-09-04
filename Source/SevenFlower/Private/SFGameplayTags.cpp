@@ -108,4 +108,9 @@ void FSFGameplayTags::InitializeNativeGameplayTags()
 	FName("InputTag.4Spell"), 
 		FString("Input Tag for 4Spell")
 	);
+
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("Damage"), 
+		FString("Damage")
+	);
 }
