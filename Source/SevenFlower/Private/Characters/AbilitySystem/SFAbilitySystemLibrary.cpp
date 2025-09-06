@@ -68,3 +68,16 @@ void USFAbilitySystemLibrary::InititalizeDefaultAttributes(const UObject* WorldC
 	const FGameplayEffectSpecHandle VitalAttributesSpecHandle = ASC->MakeOutgoingSpec(CharacterClassInfo->VitalAttributes, Level, VitalAttributesContextHandle);
 	ASC->ApplyGameplayEffectSpecToSelf(*VitalAttributesSpecHandle.Data.Get());
 }
+
+void USFAbilitySystemLibrary::GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC)
+{
+	ASFGameMode* SFGameMode = Cast<ASFGameMode>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (SFGameMode == nullptr) return;
+
+	UCharacterClassInfo* CharacterClassInfo = SFGameMode->CharacterClassInfo;
+	for (TSubclassOf<UGameplayAbility> AbilityClass : CharacterClassInfo->CommonAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
+		ASC->GiveAbility(AbilitySpec);
+	}
+}

@@ -12,6 +12,7 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
+class UAnimMontage;
 
 UCLASS(Abstract)
 class SEVENFLOWER_API ASFCharacter : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
@@ -22,7 +23,8 @@ public:
 	ASFCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
-	
+
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 protected:
 	virtual void BeginPlay() override;
 
@@ -55,5 +57,9 @@ protected:
 
 	void ApplyEffectToSelf(const TSubclassOf<UGameplayEffect>& GameplayEffectClass, const float Level) const;
 	virtual void InitializeDefaultAttributes() const;
-	
+
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<UAnimMontage> HitReactMontage;
 };

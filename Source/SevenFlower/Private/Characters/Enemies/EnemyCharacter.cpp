@@ -9,11 +9,17 @@
 #include "Components/WidgetComponent.h"
 #include "SevenFlower/SevenFlower.h"
 #include "UI/Widgets/SFUserWidget.h"
+#include "SFGameplayTags.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
 	InitAbilityActorInfo();
+	USFAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+	
 }
 
 void AEnemyCharacter::InitAbilityActorInfo()
@@ -43,11 +49,22 @@ void AEnemyCharacter::InitAbilityActorInfo()
 				OnMaxHealthChanged.Broadcast(MaxHealth.NewValue);
 			}
 		);
-
+		
+		AbilitySystemComponent->RegisterGameplayTagEvent(FSFGameplayTags::Get().Effects_HitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(
+			this,
+			&AEnemyCharacter::HitReactTagChanged
+		);
+		
 		OnHealthChanged.Broadcast(AS->GetHealth());
 		OnMaxHealthChanged.Broadcast(AS->GetMaxHealth());
 	}
 
+}
+
+void AEnemyCharacter::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	bHitReacting = NewCount > 0;
+	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
 }
 
 void AEnemyCharacter::InitializeDefaultAttributes() const

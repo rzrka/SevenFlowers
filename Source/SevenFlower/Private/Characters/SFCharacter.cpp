@@ -27,6 +27,11 @@ UAbilitySystemComponent* ASFCharacter::GetAbilitySystemComponent() const
 }
 
 
+UAnimMontage* ASFCharacter::GetHitReactMontage_Implementation()
+{
+	return HitReactMontage;
+}
+
 void ASFCharacter::BeginPlay()
 {
 	Super::BeginPlay();
