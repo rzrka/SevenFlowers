@@ -9,6 +9,7 @@
 #include "GameplayEffectTypes.h"
 #include "Net/UnrealNetwork.h"
 #include "SFGameplayTags.h"
+#include "Interaction/CombatInterface.h"
 
 
 USFAttributeSet::USFAttributeSet()
@@ -136,7 +137,15 @@ void USFAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallback
 			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
 
 			const bool bFatal = NewHealth <= 0.f;
-			if (!bFatal)
+			if (bFatal)
+			{
+				ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
+				if (CombatInterface)
+				{
+					CombatInterface->Die();
+				}
+			}
+			else
 			{
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FSFGameplayTags::Get().Effects_HitReact);
