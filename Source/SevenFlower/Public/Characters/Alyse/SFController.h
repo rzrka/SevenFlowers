@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "SFController.generated.h"
 
+class UDamageTextComponent;
 class USFInputConfiguration;
 struct FGameplayTag;
 struct FInputActionValue;
@@ -18,6 +19,11 @@ class SEVENFLOWER_API ASFController : public APlayerController
 {
 	GENERATED_BODY()
 
+public:
+
+	UFUNCTION(Client, Reliable)
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+	
 protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputAction> MoveAction;
@@ -36,5 +42,10 @@ protected:
 	TObjectPtr<USFAbilitySystemComponent> SFAbilitySystemComponent;
 
 	USFAbilitySystemComponent* GetASC();
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
+
+	
 };
  
