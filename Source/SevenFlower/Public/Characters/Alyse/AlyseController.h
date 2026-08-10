@@ -9,6 +9,7 @@
 
 
 struct FInputActionValue;
+class UInputAction;
 /**
  * 
  */
@@ -26,19 +27,16 @@ protected:
 	
 private:
 	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputMappingContext> AlyseContext;
-	
-	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> LookAction;
+	TObjectPtr<UInputAction> LookAction;
 
 	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> WalkAction;
+	TObjectPtr<UInputAction> WalkAction;
 
 	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> CrouchAction;
+	TObjectPtr<UInputAction> CrouchAction;
 
 	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> JumpAction;
+	TObjectPtr<UInputAction> JumpAction;
 	
 	void Look(const FInputActionValue& InputActionValue);
 	void Walk(const FInputActionValue& InputActionValue);

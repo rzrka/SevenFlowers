@@ -10,6 +10,7 @@
 
 
 class UAbilitySystemComponent;
+class UGameplayAbility;
 class UAttributeSet;
 class UGameplayEffect;
 class UAnimMontage;
@@ -78,7 +79,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UMaterialInstance> WeaponDissolveMaterialInstance;
 	
+	void InitCharacterAbilities();
 private:
+	
+	UPROPERTY(EditAnywhere, Category="Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;

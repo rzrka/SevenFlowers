@@ -25,15 +25,14 @@ public:
 	AAlyse2DController();
 	virtual void PlayerTick(float DeltaTime) override;
 
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	virtual void OnPossess(APawn* NewPawn) override;
 
 private:
-	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputMappingContext> AlyseContext;
-
+	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputAction> ModifierAction;
 

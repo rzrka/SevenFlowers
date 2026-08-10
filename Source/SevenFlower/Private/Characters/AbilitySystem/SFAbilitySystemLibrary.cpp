@@ -53,6 +53,7 @@ void USFAbilitySystemLibrary::InititalizeDefaultAttributes(const UObject* WorldC
 	UCharacterClassInfo* CharacterClassInfo = SFGameMode->CharacterClassInfo;
 	FCharacterClassDefaultInfo ClassDefaultInfo = CharacterClassInfo->GetClassDefaultInfo(CharacterClass);
 	
+	// TODO: сделать универсальную функцию
 	FGameplayEffectContextHandle PrimaryAttributesContextHandle = ASC->MakeEffectContext();
 	PrimaryAttributesContextHandle.AddSourceObject(AvatarActor);
 	const FGameplayEffectSpecHandle PrimaryAttributesSpecHandle = ASC->MakeOutgoingSpec(ClassDefaultInfo.PrimaryAttributes, Level, PrimaryAttributesContextHandle);

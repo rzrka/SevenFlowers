@@ -36,7 +36,7 @@ class SEVENFLOWER_API UAttributeInfo : public UDataAsset
 	GENERATED_BODY()
 public:
 
-	FSFAttributeInfo FindAttributeInfoForTag(const FGameplayTag& AttributeTag, bool bLogNotFound = false) const;
+	FSFAttributeInfo FindAttributeInfoForTag(const FGameplayTag& AttributeTag) const;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TMap<FGameplayTag, FSFAttributeInfo> AttributeInformation;

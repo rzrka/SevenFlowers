@@ -65,15 +65,6 @@ int32 AAlyseCharacter::GetPlayerLevel()
 	return AlysePlayerState->GetPlayerLevel();
 }
 
-void AAlyseCharacter::InitCharacterAbilities()
-{
-	USFAbilitySystemComponent* SFASC = CastChecked<USFAbilitySystemComponent>(AbilitySystemComponent);
-	if (!HasAuthority()) return;
-
-	SFASC->AddCharacterAbilities(StartupAbilities);
-	
-}
-
 void AAlyseCharacter::InitAbilityActorInfo()
 {
 	AAlysePlayerState* AlysePlayerState = GetPlayerState<AAlysePlayerState>();

@@ -57,9 +57,11 @@ void USFAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& Inpu
 void USFAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* AbilitySystemComponent,
                                               const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)
 {
-	FGameplayTagContainer TagContainer;
-	EffectSpec.GetAllAssetTags(TagContainer);
+	FGameplayTagContainer TagsContainer;
+	EffectSpec.GetAllAssetTags(TagsContainer);
+	
 
-	EffectAssetTags.Broadcast(TagContainer);
+
+	EffectAssetTags.Broadcast(TagsContainer);
 	
 }

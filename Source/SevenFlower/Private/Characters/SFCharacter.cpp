@@ -3,6 +3,7 @@
 
 #include "Characters/SFCharacter.h"
 #include "AbilitySystemComponent.h"
+#include "Characters/AbilitySystem/SFAbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "SevenFlower/SevenFlower.h"
 
@@ -66,7 +67,7 @@ FVector ASFCharacter::GetCombatSocketLocation()
 	check(Weapon);
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
-
+ 
 void ASFCharacter::InitAbilityActorInfo()
 {
 }
@@ -104,5 +105,14 @@ void ASFCharacter::Dissolve()
 		Weapon->SetMaterial(0, DynamicMatInst);
 		StartWeaponDissolveTimeline(DynamicMatInst);
 	}
+}
+
+void ASFCharacter::InitCharacterAbilities()
+{
+	// Инициализировать доступные спосоности персонажа
+	USFAbilitySystemComponent* SFASC = CastChecked<USFAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	SFASC->AddCharacterAbilities(StartupAbilities);
 }
 

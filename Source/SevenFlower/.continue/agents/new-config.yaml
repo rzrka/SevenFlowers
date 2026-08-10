@@ -1,0 +1,54 @@
+name: Local Assistant
+version: 1.0.0
+schema: v1
+
+models:
+  - name: qwen/qwen3-coder-30b
+    provider: lmstudio
+    model: qwen/qwen3-coder-30b
+    apiBase: http://localhost:1234/v1
+
+    roles:
+      - chat
+      - edit
+      - apply
+      - autocomplete
+
+    defaultCompletionOptions:
+      contextLength: 8192       
+      maxTokens: 4096            
+
+      temperature: 0.1
+      topP: 0.9
+
+      frequencyPenalty: 0.0
+      presencePenalty: 0.0
+
+      stream: true
+
+  - name: gpt-oss-20b
+    provider: lmstudio
+    model: openai/gpt-oss-20b
+    apiBase: http://localhost:1234/v1
+
+    roles:
+      - chat
+      - edit
+      - apply
+      - image
+
+    defaultCompletionOptions:
+      contextLength: 8192
+      maxTokens: 4096
+      temperature: 0.1
+  
+
+context:
+  - provider: code
+  - provider: file
+  - provider: folder
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: codebase
+  - provider: docs

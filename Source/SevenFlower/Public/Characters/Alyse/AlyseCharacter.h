@@ -7,7 +7,7 @@
 #include "AlyseCharacter.generated.h"
 
 
-class UGameplayAbility;
+
 /**
  * 
  */
@@ -34,10 +34,6 @@ public:
 	const float RunSpeed = 600.f;
 
 	
-protected:
-	void InitCharacterAbilities();
-
-	
 private:
 	virtual void InitAbilityActorInfo() override;
 	
@@ -46,8 +42,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class UCameraComponent> ViewCamera;
-
-	// TODO переделать в hashmap
-	UPROPERTY(EditAnywhere, Category="Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };

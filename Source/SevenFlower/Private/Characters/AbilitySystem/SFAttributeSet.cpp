@@ -34,6 +34,8 @@ USFAttributeSet::USFAttributeSet()
 	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_CriticalHitResistance, GetCriticalHitResistanceAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_HealthRegeneration, GetHealthRegenerationAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_ManaRegeneration, GetManaRegenerationAttribute);
+	
+	// Vital Attributes
 	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MaxHealth, GetMaxHealthAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MaxMana, GetMaxManaAttribute);
 
@@ -67,7 +69,7 @@ void USFAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>
 void USFAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
-
+	
 	if (Attribute == GetHealthAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
@@ -126,6 +128,7 @@ void USFAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Dam
 
 void USFAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
+    // TODO избавиться от if
 	Super::PostGameplayEffectExecute(Data);
 
 	FEffectProperties Props;

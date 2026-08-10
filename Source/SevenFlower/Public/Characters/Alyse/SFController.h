@@ -10,7 +10,9 @@ class UDamageTextComponent;
 class USFInputConfiguration;
 struct FGameplayTag;
 struct FInputActionValue;
+class UInputAction;
 class USFAbilitySystemComponent;
+class UInputMappingContext;
 /**
  * 
  */
@@ -26,7 +28,13 @@ public:
 	
 protected:
 	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<class UInputAction> MoveAction;
+	TObjectPtr<UInputMappingContext> AlyseContext;
+	
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> MoveAction;
+	
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> CloseWidgetAction;
 	
 	virtual void SetupInputComponent() override;
 	virtual void Move(const FInputActionValue& InputActionValue);

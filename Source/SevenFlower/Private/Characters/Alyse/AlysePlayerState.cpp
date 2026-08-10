@@ -19,7 +19,7 @@ AAlysePlayerState::AAlysePlayerState()
 	SetNetUpdateFrequency(100.f);
 }
 
-void AAlysePlayerState:: GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
+void AAlysePlayerState::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 

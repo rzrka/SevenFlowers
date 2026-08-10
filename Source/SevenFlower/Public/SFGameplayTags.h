@@ -40,6 +40,7 @@ public:
 	FGameplayTag InputTag_2Spell;
 	FGameplayTag InputTag_3Spell;
 	FGameplayTag InputTag_4Spell;
+	
 
 	FGameplayTag Damage;
 	FGameplayTag Effects_HitReact;
