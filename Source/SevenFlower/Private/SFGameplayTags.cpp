@@ -83,11 +83,7 @@ void FSFGameplayTags::InitializeNativeGameplayTags()
 	FName("InputTag.StrongAttack"), 
 		FString("Input Tag for Strong Attack")
 	);
-
-	GameplayTags.InputTag_Dodge = UGameplayTagsManager::Get().AddNativeGameplayTag(
-	FName("InputTag.Dodge"), 
-		FString("Input Tag for Dodge")
-	);
+	
 
 	GameplayTags.InputTag_1Spell = UGameplayTagsManager::Get().AddNativeGameplayTag(
 	FName("InputTag.1Spell"), 
@@ -118,4 +114,5 @@ void FSFGameplayTags::InitializeNativeGameplayTags()
 	FName("Effects.HitReact"),
 		FString("Tag granted when Hit Reacting")
 	);
+
 }

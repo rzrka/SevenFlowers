@@ -33,9 +33,11 @@ public:
 	FGameplayTag Attributes_Secondary_MaxHealth;
 	FGameplayTag Attributes_Secondary_MaxMana;
 	
+	
 	FGameplayTag InputTag_WeakAttack;
 	FGameplayTag InputTag_StrongAttack;
-	FGameplayTag InputTag_Dodge;
+	
+	
 	FGameplayTag InputTag_1Spell;
 	FGameplayTag InputTag_2Spell;
 	FGameplayTag InputTag_3Spell;
