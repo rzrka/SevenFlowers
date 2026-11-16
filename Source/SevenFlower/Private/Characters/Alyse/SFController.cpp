@@ -54,7 +54,7 @@ void ASFController::Move(const FInputActionValue& InputActionValue)
 	}
 }
 
-void ASFController::AbilityInputTagPressed(FGameplayTag InputTag)
+void ASFController::AbilityInputTagPressed(FGameplayTag InputTag) 
 {
 	// GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
 }

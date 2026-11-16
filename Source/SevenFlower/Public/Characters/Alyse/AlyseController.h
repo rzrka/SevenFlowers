@@ -25,6 +25,9 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	
+	virtual void AbilityInputTagPressed(FGameplayTag InputTag) override;
+	virtual void AbilityInputTagReleased(FGameplayTag InputTag) override;
+	
 private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> LookAction;

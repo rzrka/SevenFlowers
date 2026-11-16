@@ -26,6 +26,7 @@ public:
 	UFUNCTION(Client, Reliable)
 	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
 	
+	USFAbilitySystemComponent* GetASC();
 protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputMappingContext> AlyseContext;
@@ -49,7 +50,7 @@ protected:
 	UPROPERTY()
 	TObjectPtr<USFAbilitySystemComponent> SFAbilitySystemComponent;
 
-	USFAbilitySystemComponent* GetASC();
+	
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;

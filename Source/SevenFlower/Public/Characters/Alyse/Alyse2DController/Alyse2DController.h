@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SFController.h"
+#include "AlyseControllerInputState.h"
+#include "Characters/Alyse/SFController.h"
 #include "GameFramework/PlayerController.h"
 #include "Alyse2DController.generated.h"
 
@@ -11,6 +12,7 @@
 class USplineComponent;
 struct FInputActionValue;
 class UNavigationPath;
+class UAlyseControllerInputState;
 
 class IlightingInterface;
 /**
@@ -24,12 +26,22 @@ class SEVENFLOWER_API AAlyse2DController : public ASFController
 public:
 	AAlyse2DController();
 	virtual void PlayerTick(float DeltaTime) override;
-
-
+	
+	FVector Destination = FVector::ZeroVector;
+	FHitResult GetCursorHit() const {return CursorHit; }
+	UAlyseControllerInputState* GetCurrentInputState() const { return CurrentInputState; }
+	
+	void ChangeInputState(TSubclassOf<UAlyseControllerInputState> NewStateClass);
+	
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	virtual void OnPossess(APawn* NewPawn) override;
+	
+	UPROPERTY(Transient)
+	TObjectPtr<UAlyseControllerInputState> CurrentInputState;
+	
+	
 
 private:
 	
@@ -48,23 +60,9 @@ private:
 	IlightingInterface* LastActor;
 	IlightingInterface* ThisActor;
 	FHitResult CursorHit;
-
-	FVector CachedDestination = FVector::ZeroVector;
-	float FollowTime = 0.f;
-	float ShortPressThreshold = 0.5f;
-	bool bAutoRunning = false;
-	bool bTargeting = true;
-
-	UNavigationPath* GetReachablePointNear();
-
-	UPROPERTY(EditDefaultsOnly)
-	float AutoRunAcceptanceRadius = 50.f;
-
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USplineComponent> Spline;
+	
 
 	void SetSpringArm();
-
-	void AutoRun();
+	
 };
 

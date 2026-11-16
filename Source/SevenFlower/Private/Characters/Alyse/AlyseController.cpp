@@ -3,6 +3,7 @@
 #include "Characters/Alyse/AlyseController.h"
 #include "Characters/Alyse/AlyseCharacter.h"
 
+#include "SFGameplayTags.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -40,7 +41,16 @@ void AAlyseController::SetupInputComponent()
 	SFInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AAlyseController::Jump);
 }
 
+void AAlyseController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	Super::AbilityInputTagPressed(InputTag);
+}
 
+
+void AAlyseController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	Super::AbilityInputTagReleased(InputTag);
+}
 
 void AAlyseController::Look(const FInputActionValue& InputActionValue)
 {
