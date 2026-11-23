@@ -33,7 +33,6 @@ void UTargetDataUnderMouse::Activate()
 		}
 	}
 	
-	
 }
 
 void UTargetDataUnderMouse::SendMouseCursorData()

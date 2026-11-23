@@ -17,8 +17,10 @@ void UMovementState::InputTagReleased(FGameplayTag InputTag)
 
 void UMovementState::InputTagHeld(FGameplayTag InputTag)
 {	
-	Controller->Destination = Controller->GetCursorHit().ImpactPoint;
-	
+	if (Controller->GetCursorHit().bBlockingHit)
+	{
+		Controller->Destination = Controller->GetCursorHit().ImpactPoint;
+	}
 	if (APawn* Pawn = Controller->GetPawn())
 	{
 		const FVector Direction = (Controller->Destination - Pawn->GetActorLocation()).GetSafeNormal();

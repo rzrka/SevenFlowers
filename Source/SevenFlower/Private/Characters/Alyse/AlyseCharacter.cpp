@@ -25,7 +25,7 @@ AAlyseCharacter::AAlyseCharacter()
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	SpringArm->SetupAttachment(GetRootComponent());
-	SpringArm->TargetArmLength = 300.f;
+	// SpringArm->TargetArmLength = 300.f;
 		// SpringArm->SetWorldRotation(FRotator(-35.f, 0.f, 0.f));
 		// SpringArm->SocketOffset = FVector(0, 0.f, 0.f);
 		

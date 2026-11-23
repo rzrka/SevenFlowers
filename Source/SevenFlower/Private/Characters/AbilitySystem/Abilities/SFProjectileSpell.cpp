@@ -42,7 +42,8 @@ void USFProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation
 			ProjectileClass,
 			SpawnTransform,
 			GetOwningActorFromActorInfo(),
-			Cast<APawn>(GetOwningActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn
+			Cast<APawn>(GetOwningActorFromActorInfo()), 
+			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 			);
 
 		const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());

@@ -48,7 +48,6 @@ void UAutoRunState::Tick(float DeltaTime)
 	AutoRun();
 }
 
-// TODO: почему то не правильно путь считается
 UNavigationPath* UAutoRunState::GetReachablePointNear()
 {
 	const APawn* ControlledPawn = Controller->GetPawn();

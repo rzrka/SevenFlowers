@@ -18,4 +18,5 @@ void USFAssetManager::StartInitialLoading()
 	Super::StartInitialLoading();
 	
 	FSFGameplayTags::InitializeNativeGameplayTags();
+	
 }
