@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Characters/Alyse/Alyse2DController/AlyseControllerInputState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/AlyseControllerInputState.h"
 #include "Characters/AbilitySystem/SFAbilitySystemComponent.h"
 #include "MovementState.generated.h"
 

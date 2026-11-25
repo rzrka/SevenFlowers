@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Characters/Alyse/Alyse2DController/AbilityState.h"
-#include "Characters/Alyse/Alyse2DController/NormalState.h"
-#include "AlyseControllerInputState.h"
-#include "ModifierAbilityState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/AbilityState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/NormalState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/AlyseControllerInputState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/ModifierAbilityState.h"
 #include "Characters/Alyse/SFController.h"
 #include "GameFramework/PlayerController.h"
 #include "Alyse2DController.generated.h"

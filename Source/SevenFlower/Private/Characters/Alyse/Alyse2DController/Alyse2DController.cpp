@@ -12,13 +12,10 @@
 #include "Characters/Alyse/AlyseCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Characters/Alyse/Alyse2DController/AbilityState.h"
-#include "Characters/Alyse/Alyse2DController/MovementState.h"
-#include "Characters/Alyse/Alyse2DController/NormalState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/NormalState.h"
 #include "Input/SFInputComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Interaction/lightingInterface.h"
-#include "Characters/Alyse/Alyse2DController/NormalState.h"
 #include "GameFramework/MovementComponent.h"
 
 AAlyse2DController::AAlyse2DController()

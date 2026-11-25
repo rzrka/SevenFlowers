@@ -1,11 +1,11 @@
 // Copyright QueueBitGames
 
 
-#include "Characters/Alyse/Alyse2DController/AlyseControllerInputState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/AlyseControllerInputState.h"
 
 #include "Interaction/lightingInterface.h"
 #include "Characters/Alyse/Alyse2DController/Alyse2DController.h"
-#include "Characters/Alyse/Alyse2DController/MovementState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/MovementState.h"
 
 void UAlyseControllerInputState::Initialize(AAlyse2DController* NewController)
 {

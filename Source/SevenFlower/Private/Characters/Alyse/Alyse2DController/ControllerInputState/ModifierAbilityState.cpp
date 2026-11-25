@@ -1,9 +1,9 @@
 // Copyright QueueBitGames
 
 
-#include "Characters/Alyse/Alyse2DController/ModifierAbilityState.h"
-#include "Characters/Alyse/Alyse2DController/AbilityState.h"
-#include "Characters/Alyse/Alyse2DController/NormalState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/ModifierAbilityState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/AbilityState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/NormalState.h"
 
 #include "Characters/Alyse/Alyse2DController/Alyse2DController.h"
 
