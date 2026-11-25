@@ -2,10 +2,12 @@
 
 
 #include "Characters/Alyse/Alyse2DController/ControllerInputState/AlyseControllerInputState.h"
-
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/MovementState.h"
+#include "Characters/Alyse/Alyse2DController/ControllerInputState/NormalState.h"
+#include "SFGameplayTags.h"
 #include "Interaction/lightingInterface.h"
 #include "Characters/Alyse/Alyse2DController/Alyse2DController.h"
-#include "Characters/Alyse/Alyse2DController/ControllerInputState/MovementState.h"
+
 
 void UAlyseControllerInputState::Initialize(AAlyse2DController* NewController)
 {
@@ -17,8 +19,18 @@ void UAlyseControllerInputState::ChangeState(TSubclassOf<UAlyseControllerInputSt
 	 Controller->ChangeInputState(NewState);
 }
 
-void UAlyseControllerInputState::SetStateOnTarget()
+bool UAlyseControllerInputState::SetStateOnTarget(FGameplayTag InputTag)
 {
+	if (!InputTag.MatchesTagExact(FSFGameplayTags::Get().InputTag_WeakAttack))
+	{
+		if (Controller->GetASC())
+		{
+			Controller->GetASC()->AbilityInputTagPressed(InputTag);
+		}
+		
+		return false;
+	}
+	
 	AActor* Target = Controller->GetCursorHit().GetActor();
 	
 	if (Target && Target->Implements<UlightingInterface>())
@@ -28,4 +40,5 @@ void UAlyseControllerInputState::SetStateOnTarget()
 	{
 		ChangeState(UMovementState::StaticClass());
 	}
+	return true;
 }

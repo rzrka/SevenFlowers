@@ -43,8 +43,10 @@ void UAutoRunState::InputTagReleased(FGameplayTag InputTag)
 
 void UAutoRunState::InputTagPressed(FGameplayTag InputTag)
 {
-	SetStateOnTarget();
-	Controller->GetCurrentInputState()->InputTagPressed(InputTag);
+	if (SetStateOnTarget(InputTag))
+	{
+		Controller->GetCurrentInputState()->InputTagPressed(InputTag);
+	}
 }
 
 void UAutoRunState::Tick(float DeltaTime)

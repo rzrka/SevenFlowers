@@ -35,7 +35,7 @@ protected:
 	UPROPERTY()
 	TObjectPtr<AAlyse2DController> Controller;
 	
-	void SetStateOnTarget();
+	bool SetStateOnTarget(FGameplayTag InputTag);
 	
 
 };

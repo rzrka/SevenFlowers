@@ -10,18 +10,9 @@
 
 void UNormalState::InputTagPressed(FGameplayTag InputTag)
 {
-	if (!InputTag.MatchesTagExact(FSFGameplayTags::Get().InputTag_WeakAttack))
+	if (SetStateOnTarget(InputTag))
 	{
-		if (Controller->GetASC())
-		{
-			Controller->GetASC()->AbilityInputTagPressed(InputTag);
-		}
-		
-		return;
+		Controller->GetCurrentInputState()->InputTagPressed(InputTag);
 	}
-	
-	SetStateOnTarget();
-	
-	Controller->GetCurrentInputState()->InputTagPressed(InputTag);
 }
 
