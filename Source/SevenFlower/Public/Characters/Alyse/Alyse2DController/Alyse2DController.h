@@ -3,7 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Characters/Alyse/Alyse2DController/AbilityState.h"
+#include "Characters/Alyse/Alyse2DController/NormalState.h"
 #include "AlyseControllerInputState.h"
+#include "ModifierAbilityState.h"
 #include "Characters/Alyse/SFController.h"
 #include "GameFramework/PlayerController.h"
 #include "Alyse2DController.generated.h"
@@ -31,12 +34,15 @@ public:
 	FHitResult GetCursorHit() const {return CursorHit; }
 	UAlyseControllerInputState* GetCurrentInputState() const { return CurrentInputState; }
 	
+	IlightingInterface* GetThisActor() const {return ThisActor; }
+	
 	void ChangeInputState(TSubclassOf<UAlyseControllerInputState> NewStateClass);
 	
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	virtual void OnPossess(APawn* NewPawn) override;
+	
 	
 	UPROPERTY(Transient)
 	TObjectPtr<UAlyseControllerInputState> CurrentInputState;
@@ -47,11 +53,10 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<class UInputAction> ModifierAction;
-
-	void ModifierPressed() { bModifierKeyDown = true;};
-	void ModifierReleased() { bModifierKeyDown = false;};
-	bool bModifierKeyDown = false;
-
+	
+	void ModifierPressed(const FInputActionValue& InputActionValue) { ChangeInputState(UModifierAbilityState::StaticClass()); };
+	void ModifierReleased(const FInputActionValue& InputActionValue) { ChangeInputState(UNormalState::StaticClass()); };
+	
 	virtual void AbilityInputTagPressed(FGameplayTag InputTag) override;
 	virtual void AbilityInputTagReleased(FGameplayTag InputTag) override;
 	virtual void AbilityInputTagHeld(FGameplayTag InputTag) override;

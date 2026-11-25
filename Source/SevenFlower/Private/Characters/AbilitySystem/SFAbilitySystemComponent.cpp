@@ -24,7 +24,7 @@ void USFAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<U
 	}
 }
 
-void USFAbilitySystemComponent::AbilityInputTagHeld(const FGameplayTag& InputTag)
+void USFAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& InputTag)
 {
 	if (!InputTag.IsValid()) return;
 	
@@ -39,6 +39,11 @@ void USFAbilitySystemComponent::AbilityInputTagHeld(const FGameplayTag& InputTag
 			}
 		}
 	}
+}
+
+void USFAbilitySystemComponent::AbilityInputTagHeld(const FGameplayTag& InputTag)
+{
+	AbilityInputTagPressed(InputTag);
 }
 
 void USFAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& InputTag)

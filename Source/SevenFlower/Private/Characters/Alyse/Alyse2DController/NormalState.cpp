@@ -14,21 +14,13 @@ void UNormalState::InputTagPressed(FGameplayTag InputTag)
 	{
 		if (Controller->GetASC())
 		{
-			Controller->GetASC()->AbilityInputTagReleased(InputTag);
+			Controller->GetASC()->AbilityInputTagPressed(InputTag);
 		}
 		
 		return;
 	}
 	
-	AActor* Target = Controller->GetCursorHit().GetActor();
-	
-	if (Target && Target->Implements<UlightingInterface>())
-	{
-		ChangeState(UAbilityState::StaticClass());
-	}else
-	{
-		ChangeState(UMovementState::StaticClass());
-	}
+	SetStateOnTarget();
 	
 	Controller->GetCurrentInputState()->InputTagPressed(InputTag);
 }

@@ -1,13 +1,16 @@
 // Copyright QueueBitGames
 
+#include "Characters/Alyse/Alyse2DController/AutoRunState.h"
+
 #include "Characters/Alyse/Alyse2DController/Alyse2DController.h"
 #include "Characters/Alyse/Alyse2DController/AlyseControllerInputState.h"
 #include "Components/SplineComponent.h"
-#include "Characters/Alyse/Alyse2DController/AutoRunState.h"
-
+#include "Characters/Alyse/Alyse2DController/NormalState.h"
+#include "Characters/Alyse/Alyse2DController/MovementState.h"
+#include "Interaction/lightingInterface.h"
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
-#include "Characters/Alyse/Alyse2DController/NormalState.h"
+
 
 UAutoRunState::UAutoRunState()
 {
@@ -40,7 +43,8 @@ void UAutoRunState::InputTagReleased(FGameplayTag InputTag)
 
 void UAutoRunState::InputTagPressed(FGameplayTag InputTag)
 {
-	ChangeState(UNormalState::StaticClass());
+	SetStateOnTarget();
+	Controller->GetCurrentInputState()->InputTagPressed(InputTag);
 }
 
 void UAutoRunState::Tick(float DeltaTime)

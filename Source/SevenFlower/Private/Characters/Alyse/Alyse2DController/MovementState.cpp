@@ -1,7 +1,7 @@
 // Copyright QueueBitGames
 
-#include "Characters/Alyse/Alyse2DController/Alyse2DController.h"
 #include "Characters/Alyse/Alyse2DController/MovementState.h"
+#include "Characters/Alyse/Alyse2DController/Alyse2DController.h"
 #include "Characters/Alyse/Alyse2DController/NormalState.h"
 
 
@@ -15,8 +15,8 @@ void UMovementState::InputTagReleased(FGameplayTag InputTag)
 	
 }
 
-void UMovementState::InputTagHeld(FGameplayTag InputTag)
-{	
+void UMovementState::Move()
+{
 	if (Controller->GetCursorHit().bBlockingHit)
 	{
 		Controller->Destination = Controller->GetCursorHit().ImpactPoint;
@@ -27,4 +27,16 @@ void UMovementState::InputTagHeld(FGameplayTag InputTag)
 		Pawn->AddMovementInput(Direction);
 	}
 }
+
+void UMovementState::InputTagPressed(FGameplayTag InputTag)
+{
+	Move();
+}
+
+void UMovementState::InputTagHeld(FGameplayTag InputTag)
+{	
+	Move();
+}
+
+
 

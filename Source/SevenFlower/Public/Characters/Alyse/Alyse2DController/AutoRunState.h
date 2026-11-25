@@ -6,6 +6,8 @@
 #include "Characters/Alyse/Alyse2DController/AlyseControllerInputState.h"
 #include "AutoRunState.generated.h"
 
+class UNavigationPath;
+class USplineComponent;
 /**
  * 
  */

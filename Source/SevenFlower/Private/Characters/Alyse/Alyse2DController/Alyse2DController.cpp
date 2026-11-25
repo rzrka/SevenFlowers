@@ -100,19 +100,6 @@ void AAlyse2DController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
 	Super::AbilityInputTagPressed(InputTag);
 	
-	
-	if (InputTag.MatchesTagExact(FSFGameplayTags::Get().InputTag_WeakAttack))
-	{
-		if (ThisActor)
-		{
-			ChangeInputState(UAbilityState::StaticClass());
-		}
-		else
-		{
-			ChangeInputState(UMovementState::StaticClass());
-		}
-	}
-	
 	CurrentInputState->InputTagPressed(InputTag);
 }
 

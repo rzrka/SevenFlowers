@@ -18,7 +18,13 @@ class SEVENFLOWER_API UMovementState : public UAlyseControllerInputState
 	GENERATED_BODY()
 	
 	
-	virtual void InputTagReleased(FGameplayTag InputTag) override;
+	virtual void InputTagPressed(FGameplayTag InputTag) override;
 	virtual void InputTagHeld(FGameplayTag InputTag) override;
+	virtual void InputTagReleased(FGameplayTag InputTag) override;
 	
+	
+protected:
+	float FollowTime = 0.f;
+	float ShortPressThreshold = 0.5f;
+	void Move();
 };
